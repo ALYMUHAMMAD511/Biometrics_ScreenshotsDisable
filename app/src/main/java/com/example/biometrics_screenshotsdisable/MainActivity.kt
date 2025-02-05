@@ -6,7 +6,6 @@ import com.example.biometrics_screenshotsdisable.databinding.ActivityMainBinding
 import android.view.WindowManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 
 
@@ -29,9 +28,13 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         // Set up the ActionBar with the Navigation UI
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false) // Disable title display
+        supportActionBar?.elevation = 0f // Ensure there's no elevation
 
         setupActionBarWithNavController(navController)
         onSupportNavigateUp()
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
