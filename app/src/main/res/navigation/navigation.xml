@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/fragment12"
+        android:name="com.example.biometrics_screenshotsdisable.Fragment1"
+        android:label="fragment_1"
+        tools:layout="@layout/fragment_1" />
+    <fragment
+        android:id="@+id/fragment22"
+        android:name="com.example.biometrics_screenshotsdisable.Fragment2"
+        android:label="fragment_2"
+        tools:layout="@layout/fragment_2" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.biometrics_screenshotsdisable.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_fragment12"
+            app:destination="@id/fragment12" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragment22"
+            app:destination="@id/fragment22" />
+    </fragment>
+</navigation>
