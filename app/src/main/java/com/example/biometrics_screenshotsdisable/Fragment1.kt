@@ -20,6 +20,7 @@ class Fragment1 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         Toast.makeText(context, "onCreateView", Toast.LENGTH_SHORT).show()
+
         return inflater.inflate(R.layout.fragment_1, container, false)
     }
 

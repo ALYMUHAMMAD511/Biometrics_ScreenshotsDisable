@@ -95,6 +95,7 @@ class MainFragment : Fragment() {
         binding.btnFragment2.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_fragment22)
         }
+        activity?.actionBar?.hide()
         val view = binding.root
         return view
     }

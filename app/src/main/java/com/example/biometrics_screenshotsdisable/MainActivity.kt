@@ -6,6 +6,7 @@ import com.example.biometrics_screenshotsdisable.databinding.ActivityMainBinding
 import android.view.WindowManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 
 
@@ -21,15 +22,15 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         )
-
         // Obtain reference to the NavHostFragment
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         // Get the NavController
         navController = navHostFragment.navController
         // Set up the ActionBar with the Navigation UI
-        setupActionBarWithNavController(navController)
+        setSupportActionBar(binding.toolbar)
 
+        setupActionBarWithNavController(navController)
         onSupportNavigateUp()
     }
 
