@@ -47,6 +47,16 @@ class MainFragment : Fragment() {
 
 
         binding.btnLogin.isEnabled = false
+
+        // Check shared preferences if biometrics were requested
+        val prefs = requireActivity().getSharedPreferences("BiometricPrefs", AppCompatActivity.MODE_PRIVATE)
+        val biometricsRequested = prefs.getBoolean("biometrics_requested", false)
+
+        if (!biometricsRequested) {
+            checkDeviceHasBiometric()
+            prefs.edit().putBoolean("biometrics_requested", true).apply()  // Update flag so it's only called once
+        }
+
         binding.imgFingerPrint.setOnClickListener {
             checkDeviceHasBiometric()
         }
@@ -70,6 +80,8 @@ class MainFragment : Fragment() {
                     Toast.makeText(requireContext(),
                         "Authentication succeeded!", Toast.LENGTH_SHORT)
                         .show()
+
+                    findNavController().navigate(R.id.action_mainFragment_to_fragment12)
                 }
 
                 override fun onAuthenticationFailed() {

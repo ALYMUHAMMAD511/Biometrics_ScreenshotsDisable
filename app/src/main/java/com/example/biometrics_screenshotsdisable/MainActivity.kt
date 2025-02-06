@@ -14,6 +14,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
+    companion object{
+        private const val PREFS_NAME = "BiometricPrefs"
+        private const val KEY_BIOMETRICS_REQUESTED = "biometrics_requested"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,7 +42,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
         onSupportNavigateUp()
 
-
+        // Set the flag as false when the app starts
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        prefs.edit().putBoolean(KEY_BIOMETRICS_REQUESTED, false).apply()
     }
 
     override fun onSupportNavigateUp(): Boolean {
