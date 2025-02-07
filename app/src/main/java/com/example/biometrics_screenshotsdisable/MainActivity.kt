@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.biometrics_screenshotsdisable.databinding.ActivityMainBinding
 import android.view.WindowManager
-import androidx.activity.enableEdgeToEdge
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -14,9 +13,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
-    companion object{
-        private const val PREFS_NAME = "BiometricPrefs"
-        private const val KEY_BIOMETRICS_REQUESTED = "biometrics_requested"
+    companion object {
+        var IS_AUTHENTICATED = false  // Boolean variable to track authentication status
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,14 +39,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
         onSupportNavigateUp()
 
-        // Set the flag as false when the app starts
-        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        prefs.edit().putBoolean(KEY_BIOMETRICS_REQUESTED, false).apply()
+        IS_AUTHENTICATED = false
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-
 }

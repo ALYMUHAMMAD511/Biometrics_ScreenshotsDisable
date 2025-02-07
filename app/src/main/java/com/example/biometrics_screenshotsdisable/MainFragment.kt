@@ -48,18 +48,11 @@ class MainFragment : Fragment() {
 
         binding.btnLogin.isEnabled = false
 
-        // Check shared preferences if biometrics were requested
-        val prefs = requireActivity().getSharedPreferences("BiometricPrefs", AppCompatActivity.MODE_PRIVATE)
-        val biometricsRequested = prefs.getBoolean("biometrics_requested", false)
-
-        if (!biometricsRequested) {
-            checkDeviceHasBiometric()
-            prefs.edit().putBoolean("biometrics_requested", true).apply()  // Update flag so it's only called once
-        }
-
-        binding.imgFingerPrint.setOnClickListener {
+        // If already authenticated, do not call checkDeviceHasBiometric()
+        if (!MainActivity.IS_AUTHENTICATED) {
             checkDeviceHasBiometric()
         }
+
         executor = ContextCompat.getMainExecutor(requireContext())
         biometricPrompt = BiometricPrompt(this, executor,
             object : BiometricPrompt.AuthenticationCallback() {
@@ -77,10 +70,12 @@ class MainFragment : Fragment() {
                     result: BiometricPrompt.AuthenticationResult,
                 ) {
                     super.onAuthenticationSucceeded(result)
-                    Toast.makeText(requireContext(),
-                        "Authentication succeeded!", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(), "Authentication succeeded!", Toast.LENGTH_SHORT).show()
 
+                    // Mark the user as authenticated
+                    MainActivity.IS_AUTHENTICATED = true
+
+                    // Navigate to Fragment1
                     findNavController().navigate(R.id.action_mainFragment_to_fragment12)
                 }
 
